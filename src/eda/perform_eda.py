@@ -11,8 +11,8 @@ def log(message):
     print(f"[{datetime.datetime.now()}] [LOG]: {message}")
 
 # Set data paths
-data_dir = os.path.join(os.path.dirname(__file__), '../../data/cleaned')
-processed_data_dir = os.path.join(os.path.dirname(__file__), '../../data/processed')
+data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/cleaned'))
+processed_data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data/processed'))
 imdb_basics_path = os.path.join(data_dir, 'imdb_basics_cleaned.csv')
 imdb_ratings_path = os.path.join(data_dir, 'imdb_ratings_cleaned.csv')
 tmdb_data_path = os.path.join(data_dir, 'tmdb_data_cleaned.csv')
@@ -49,21 +49,30 @@ tmdb_data_stats = tmdb_data.describe(include='all')
 print(tmdb_data_stats)
 log("Basic statistics for TMDb data calculated.")
 
-# Save processed datasets
-log("Saving processed IMDb basics data...")
-imdb_basics_processed_path = os.path.join(processed_data_dir, 'imdb_basics_processed.csv')
-imdb_basics.to_csv(imdb_basics_processed_path, index=False)
-log(f"IMDb basics data saved to '{imdb_basics_processed_path}'")
+# Save processed datasets with error handling
+try:
+    log("Saving processed IMDb basics data...")
+    imdb_basics_processed_path = os.path.join(processed_data_dir, 'imdb_basics_processed.csv')
+    imdb_basics.to_csv(imdb_basics_processed_path, index=False)
+    log(f"IMDb basics data saved to '{imdb_basics_processed_path}'")
+except OSError as e:
+    log(f"Error saving IMDb basics data: {e}")
 
-log("Saving processed IMDb ratings data...")
-imdb_ratings_processed_path = os.path.join(processed_data_dir, 'imdb_ratings_processed.csv')
-imdb_ratings.to_csv(imdb_ratings_processed_path, index=False)
-log(f"IMDb ratings data saved to '{imdb_ratings_processed_path}'")
+try:
+    log("Saving processed IMDb ratings data...")
+    imdb_ratings_processed_path = os.path.join(processed_data_dir, 'imdb_ratings_processed.csv')
+    imdb_ratings.to_csv(imdb_ratings_processed_path, index=False)
+    log(f"IMDb ratings data saved to '{imdb_ratings_processed_path}'")
+except OSError as e:
+    log(f"Error saving IMDb ratings data: {e}")
 
-log("Saving processed TMDb data...")
-tmdb_data_processed_path = os.path.join(processed_data_dir, 'tmdb_data_processed.csv')
-tmdb_data.to_csv(tmdb_data_processed_path, index=False)
-log(f"TMDb data saved to '{tmdb_data_processed_path}'")
+try:
+    log("Saving processed TMDb data...")
+    tmdb_data_processed_path = os.path.join(processed_data_dir, 'tmdb_data_processed.csv')
+    tmdb_data.to_csv(tmdb_data_processed_path, index=False)
+    log(f"TMDb data saved to '{tmdb_data_processed_path}'")
+except OSError as e:
+    log(f"Error saving TMDb data: {e}")
 
 # Visualizations
 # 1. Histogram for IMDb average ratings
