@@ -1,9 +1,40 @@
-pandas
-numpy
-scikit-learn
-tensorflow
-keras
-nltk
-matplotlib
-seaborn
-jupyterlab
+# Core Data Science Libraries
+pandas>=1.5.0
+numpy>=1.21.0
+scipy>=1.9.0
+
+# Machine Learning Libraries
+scikit-learn>=1.1.0
+joblib>=1.2.0
+
+# Deep Learning Libraries
+tensorflow>=2.10.0
+keras>=2.10.0
+
+# Natural Language Processing
+transformers>=4.21.0
+torch>=1.12.0
+textblob>=0.17.1
+textstat>=0.7.3
+
+# Data Visualization
+matplotlib>=3.5.0
+seaborn>=0.11.0
+plotly>=5.10.0
+
+# Web Scraping (for data collection)
+requests>=2.28.0
+beautifulsoup4>=4.11.0
+
+# Development and Utilities
+jupyter>=1.0.0
+jupyterlab>=3.4.0
+ipykernel>=6.15.0
+
+# Code Quality
+black>=22.6.0
+flake8>=5.0.0
+
+# Configuration and Logging
+python-dotenv>=0.20.0
+pyyaml>=6.0
